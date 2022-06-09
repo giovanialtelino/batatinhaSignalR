@@ -36,3 +36,12 @@ C:\Users\giova\Code\BatatinhaSignalR\obj\Debug\netcoreapp3.1\BatatinhaSignalR.cs
 C:\Users\giova\Code\BatatinhaSignalR\obj\Debug\netcoreapp3.1\BatatinhaSignalR.dll
 C:\Users\giova\Code\BatatinhaSignalR\obj\Debug\netcoreapp3.1\BatatinhaSignalR.pdb
 C:\Users\giova\Code\BatatinhaSignalR\obj\Debug\netcoreapp3.1\BatatinhaSignalR.genruntimeconfig.cache
+C:\Users\giova\Code\BatatinhaSignalR\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
+C:\Users\giova\Code\BatatinhaSignalR\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\giova\Code\BatatinhaSignalR\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\giova\Code\BatatinhaSignalR\obj\Debug\netcoreapp3.1\BatatinhaSignalR.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\giova\Code\BatatinhaSignalR\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\giova\Code\BatatinhaSignalR\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\giova\Code\BatatinhaSignalR\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\giova\Code\BatatinhaSignalR\bin\Debug\netcoreapp3.1\System.Reactive.dll
+C:\Users\giova\Code\BatatinhaSignalR\bin\Debug\netcoreapp3.1\System.Reactive.xml
