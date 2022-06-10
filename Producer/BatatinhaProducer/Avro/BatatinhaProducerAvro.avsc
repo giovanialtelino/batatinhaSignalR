@@ -1,0 +1,8 @@
+﻿{"namespace": "batatinha",
+ "type": "record",
+ "name": "BatatinhaDisponivel",
+ "fields": [
+     {"name": "tipo", "type": "string"},
+     {"name": "quantidade",  "type": "int"} 
+ ]
+}

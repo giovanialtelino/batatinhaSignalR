@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "BatatinhaProducer": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
