@@ -11,31 +11,53 @@ using System.Threading.Tasks;
 
 namespace BatatinhaSignalR.HostedService
 {
-    public class CalculatorHostedService : IHostedService
+    public class CalculatorHostedService : BackgroundService
     {
         private readonly ChannelReader<ValueControllerModelOne> _readerOne;
         private readonly ChannelReader<ValueControllerModelTwo> _readerTwo;
-        private readonly IDisposable _subscribers;
         private readonly IHubContext<ChatHub, IReceiveMessage> _clockHub;
+        private decimal LastCalculatedValue;
 
         public CalculatorHostedService(ChannelReader<ValueControllerModelOne> readerOne,
             ChannelReader<ValueControllerModelTwo> readerTwo,
-            IHubContext<ChatHub, IReceiveMessage> clockHub)
+            IHubContext<ChatHub, IReceiveMessage> clockHub
+            )
         {
             _readerOne = readerOne;
             _readerTwo = readerTwo;
             _clockHub = clockHub;
+            LastCalculatedValue = 0;
         }
 
-        public Task StartAsync(CancellationToken cancellationToken)
+        private async Task CalculateAndNotify(decimal one, decimal two)
         {
-            var lastOne = new ValueControllerModelOne();
-            var lastTwo = new ValueControllerModelTwo();
-            var newValue = false;
+            var total = one + two;
 
+            if (total != LastCalculatedValue)
+            {
+                LastCalculatedValue = total;
+
+                var resultObservableModel = new ResultObservableModel { Total = total };
+
+                Console.WriteLine("Novo valor:" + total.ToString());
+
+                await _clockHub.Clients.All.ReceiveMessage("total" , total.ToString());
+            }
+            else
+            {
+               await _clockHub.Clients.All.MissingData("sem update");
+            }
+        }
+
+        protected override Task ExecuteAsync(CancellationToken stoppingToken)
+        {
             Task.Run(async () =>
             {
-                while (!cancellationToken.IsCancellationRequested)
+                var lastOne = new ValueControllerModelOne();
+                var lastTwo = new ValueControllerModelTwo();
+                var newValue = false;
+
+                while (!stoppingToken.IsCancellationRequested)
                 {
                     newValue = false;
 
@@ -55,29 +77,12 @@ namespace BatatinhaSignalR.HostedService
                     }
 
                     if (newValue && lastOne.Value != 0 && lastTwo.Value != 0)
-                        CalculateAndNotify(lastOne.Value, lastTwo.Value);
+                        await CalculateAndNotify(lastOne.Value, lastTwo.Value);
                 }
-            });
+
+            }, stoppingToken);
 
             return Task.CompletedTask;
         }
-
-
-        private async Task CalculateAndNotify(decimal one, decimal two)
-        {
-            var total = one + two;
-            var resultObservableModel = new ResultObservableModel { Total = total };
-
-            Console.WriteLine(total.ToString());
-
-            _clockHub.Clients.All.GetValuePrint(resultObservableModel.Total.ToString());
-        }
-
-        public Task StopAsync(CancellationToken cancellationToken)
-        {
-            Console.WriteLine("Explodiu Chucks!");
-            return Task.CompletedTask;
-        }
-
     }
 }

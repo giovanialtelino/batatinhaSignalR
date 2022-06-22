@@ -8,15 +8,13 @@ namespace BatatinhaSignalR.Hubs
 {
     public class ChatHub : Hub<IReceiveMessage>
     {
-        private readonly ICalculator _calculator;
-        public ChatHub(ICalculator calculator)
+        public ChatHub()
         {
-            _calculator = calculator;
         }
 
         public async Task SendMessage(string user, string message)
         {
-            await Clients.All.GetValuePrint("Hello");
+            await Clients.All.ReceiveMessage(user, message);
         }
     }
 }

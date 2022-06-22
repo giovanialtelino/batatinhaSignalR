@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 using System.Threading.Channels;
 using BatatinhaSignalR.Model;
 using BatatinhaSignalR.HostedService;
-using BatatinhaSignalR.Controller;
 
 namespace BatatinhaSignalR
 {
@@ -29,6 +28,7 @@ namespace BatatinhaSignalR
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
             services.AddRazorPages();
             services.AddSignalR();
 
@@ -46,7 +46,6 @@ namespace BatatinhaSignalR
 
             services.AddHostedService<CalculatorHostedService>();
             services.AddHostedService<KafkaReader>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

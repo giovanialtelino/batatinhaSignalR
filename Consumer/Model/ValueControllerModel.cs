@@ -5,12 +5,12 @@ namespace BatatinhaSignalR.Model
 {
     public class ValueControllerModelOne
     {
-        public Decimal Value { get; set; }
+        public int Value { get; set; }
 
     }
 
     public class ValueControllerModelTwo
     {
-        public decimal Value { get; set; }
+        public int Value { get; set; }
     }
 }

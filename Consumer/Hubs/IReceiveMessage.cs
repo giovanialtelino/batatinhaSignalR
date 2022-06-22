@@ -4,6 +4,8 @@ namespace BatatinhaSignalR.Hubs
 {
     public interface IReceiveMessage
     {
-        Task GetValuePrint(string message);
+        Task ReceiveMessage(string user, string message);
+
+        Task MissingData(string error);
     }
 }

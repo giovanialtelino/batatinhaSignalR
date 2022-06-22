@@ -51,7 +51,7 @@ namespace BatatinhaProducer
 
                     try
                     {
-                        var quantidade = random.Next(1, 13);
+                        var quantidade = random.Next(1, 3);
 
                         var tipo = (quantidade % 2) == 0 ? "assada" : "frita";
 
