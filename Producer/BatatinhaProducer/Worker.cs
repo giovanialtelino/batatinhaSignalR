@@ -27,7 +27,7 @@ namespace BatatinhaProducer
         {
             var config = new ProducerConfig
             {
-                ClientId = "batima",
+                ClientId = "Alfred",
                 BootstrapServers = "localhost:9092"
 
             };
@@ -39,6 +39,7 @@ namespace BatatinhaProducer
 
             using var schemaRegistry = new CachedSchemaRegistryClient(schemaRegistryConfig);
 
+            var random = new Random();
 
             using (var producer = new ProducerBuilder<Null, BatatinhaDisponivel>(config)
                 .SetValueSerializer(new AvroSerializer<BatatinhaDisponivel>(schemaRegistry))
@@ -47,12 +48,16 @@ namespace BatatinhaProducer
                 while (!stoppingToken.IsCancellationRequested)
                 {
                     _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-                 
+
                     try
                     {
-                        await producer.ProduceAsync("batata-delivery", new Message<Null, BatatinhaDisponivel> { Value = new BatatinhaDisponivel { quantidade = 10, tipo = "assada" } });
+                        var quantidade = random.Next(1, 13);
 
-                        await Task.Delay(50, stoppingToken);
+                        var tipo = (quantidade % 2) == 0 ? "assada" : "frita";
+
+                        await producer.ProduceAsync("batata-delivery", new Message<Null, BatatinhaDisponivel> { Value = new BatatinhaDisponivel { quantidade = quantidade, tipo = tipo } });
+
+                        await Task.Delay(1000, stoppingToken);
                     }
                     catch (Exception e)
                     {
