@@ -30,7 +30,7 @@ namespace BatatinhaSignalR.HostedService
                 var config = new ConsumerConfig
                 {
                     BootstrapServers = "localhost:9092",
-                    ClientId = "batima",
+                    ClientId = "batima2",
                     GroupId = "marvel"
                 };
 
